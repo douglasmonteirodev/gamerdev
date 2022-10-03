@@ -22,6 +22,8 @@ const Signup = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate();
+
   const signup = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -58,8 +60,12 @@ const Signup = () => {
         }
       );
 
-      console.log(user);
+      setLoading(false);
+
+      toast.success("Conta criada com sucesso");
+      navigate("/login");
     } catch (error) {
+      setLoading(false);
       toast.error("Aconteceu algum erro");
     }
   };
@@ -69,49 +75,55 @@ const Signup = () => {
       <section>
         <Container>
           <Row>
-            <Col lg='6' className='m-auto text-center'>
-              <h3 className='fw-bold fs-4 mb-4'>Signup</h3>
-              <Form className='auth__form' onSubmit={signup}>
-                <FormGroup className='form__group'>
-                  <input
-                    type='text'
-                    placeholder='Nome de usuário'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </FormGroup>
+            {loading ? (
+              <Col className='text-center' lg='12'>
+                <h5 className='fw-bold'>Carregando...</h5>
+              </Col>
+            ) : (
+              <Col lg='6' className='m-auto text-center'>
+                <h3 className='fw-bold fs-4 mb-4'>Signup</h3>
+                <Form className='auth__form' onSubmit={signup}>
+                  <FormGroup className='form__group'>
+                    <input
+                      type='text'
+                      placeholder='Nome de usuário'
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </FormGroup>
 
-                <FormGroup className='form__group'>
-                  <input
-                    type='email'
-                    placeholder='exemplo123@gmail.com'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                </FormGroup>
+                  <FormGroup className='form__group'>
+                    <input
+                      type='email'
+                      placeholder='exemplo123@gmail.com'
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </FormGroup>
 
-                <FormGroup className='form__group'>
-                  <input
-                    type='password'
-                    placeholder='Insira sua senha'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </FormGroup>
+                  <FormGroup className='form__group'>
+                    <input
+                      type='password'
+                      placeholder='Insira sua senha'
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </FormGroup>
 
-                <FormGroup className='form__group'>
-                  <input type='file' onChange={(e) => setFile(e.target.files[0])} />
-                </FormGroup>
+                  <FormGroup className='form__group'>
+                    <input type='file' onChange={(e) => setFile(e.target.files[0])} />
+                  </FormGroup>
 
-                <button type='submit' className='buy__btn auth__btn'>
-                  Criar uma conta
-                </button>
-                <p>
-                  Ja passui uma conta?
-                  <Link to='/login'> Login</Link>
-                </p>
-              </Form>
-            </Col>
+                  <button type='submit' className='buy__btn auth__btn'>
+                    Criar uma conta
+                  </button>
+                  <p>
+                    Ja passui uma conta?
+                    <Link to='/login'> Login</Link>
+                  </p>
+                </Form>
+              </Col>
+            )}
           </Row>
         </Container>
       </section>
