@@ -11,8 +11,8 @@ import "../styles/login.css";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUserame] = useState("");
-  const [file, setFile] = useState("");
+  const [username, setUsername] = useState("");
+  const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const signup = async (e) => {
@@ -20,11 +20,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
       const user = userCredential.user;
 
@@ -45,7 +41,7 @@ const Signup = () => {
                     type='text'
                     placeholder='Nome de usuário'
                     value={username}
-                    onChange={(e) => setUserame(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </FormGroup>
 
@@ -68,11 +64,7 @@ const Signup = () => {
                 </FormGroup>
 
                 <FormGroup className='form__group'>
-                  <input
-                    type='file'
-                    value={file}
-                    onChange={(e) => setPassword(e.target.files[0])}
-                  />
+                  <input type='file' onChange={(e) => setFile(e.target.files[0])} />
                 </FormGroup>
 
                 <button type='submit' className='buy__btn auth__btn'>
