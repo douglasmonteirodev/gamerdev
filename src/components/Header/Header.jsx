@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import { Container, Row } from "reactstrap";
 import { useSelector } from "react-redux";
 
+import useAuth from "../../custom-hooks/useAuth";
 import logo from "../../assets/images/logo.png";
 import userIcon from "../../assets/images/user.png";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.config";
 import "./header.css";
+import { toast } from "react-toastify";
 
 const nav__links = [
   {
@@ -25,10 +29,23 @@ const nav__links = [
 ];
 const Header = () => {
   const [headerShrink, setHeaderShrink] = useState(false);
+  const [logout, setLogout] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+
+  const handlerLogout = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("Logout feito com sucesso");
+        navigate("/home");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
 
   useEffect(() => {
     const scrollListener = () => {
@@ -42,11 +59,14 @@ const Header = () => {
     };
   }, []);
 
-  const menuToggle = () =>
-    menuRef.current.classList.toggle("active__menu");
+  const menuToggle = () => menuRef.current.classList.toggle("active__menu");
 
   const navigateCart = () => {
     navigate("/cart");
+  };
+
+  const toggleProfileActions = () => {
+    setLogout(!logout);
   };
 
   return (
@@ -65,9 +85,7 @@ const Header = () => {
                   <li className='nav__item' key={index}>
                     <NavLink
                       to={item.path}
-                      className={(navClass) =>
-                        navClass.isActive ? "nav__active" : ""
-                      }
+                      className={(navClass) => (navClass.isActive ? "nav__active" : "")}
                     >
                       {item.display}
                     </NavLink>
@@ -85,13 +103,27 @@ const Header = () => {
                 <i className='ri-shopping-bag-line'></i>
                 <span className='badge'>{totalQuantity}</span>
               </span>
-              <span>
+              <div className='profile'>
                 <motion.img
                   whileTap={{ scale: 1.2 }}
-                  src={userIcon}
+                  src={currentUser ? currentUser.photoURL : userIcon}
                   alt='user'
+                  onClick={toggleProfileActions}
                 />
-              </span>
+                <div
+                  className={logout ? "profile__actions" : "profile__action-hide"}
+                  onClick={toggleProfileActions}
+                >
+                  {currentUser ? (
+                    <span onClick={handlerLogout}>Logout</span>
+                  ) : (
+                    <div className='d-flex align-items-center justify-content-center flex-column gap-2 fw-bold'>
+                      <Link to='/signup'>Signup</Link>
+                      <Link to='/login'>Login</Link>
+                    </div>
+                  )}
+                </div>
+              </div>
               <div className='mobile__menu'>
                 <span onClick={menuToggle}>
                   <i className='ri-menu-line'></i>
