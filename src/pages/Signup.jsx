@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import Helmet from "../components/Helmet/Helmet";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { setDoc, doc } from "firebase/firestore";
+
 import { auth } from "../firebase.config";
+import { db } from "../firebase.config";
+import { storage } from "../firebase.config";
+
+import { toast } from "react-toastify";
 
 import "../styles/login.css";
 
@@ -24,8 +31,37 @@ const Signup = () => {
 
       const user = userCredential.user;
 
+      const storageRef = ref(storage, `images/${Date.now() + username}`);
+
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        (error) => {
+          toast.error(error.message);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            //update user profile
+            await updateProfile(user, {
+              displayName: username,
+              photoURL: downloadURL,
+            });
+            // store user data in firestore db
+
+            await setDoc(doc(db, "users", user.uid), {
+              uid: user.uid,
+              displayName: username,
+              email,
+              photoURL: downloadURL,
+            });
+          });
+        }
+      );
+
       console.log(user);
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Aconteceu algum erro");
+    }
   };
 
   return (
