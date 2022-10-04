@@ -217,7 +217,7 @@ const products = [
 
   {
     id: "09",
-    productName: "Gabinete Gamer Redragon, Wheel Jack",
+    productName: "Gabinete Gamer Redragon Wheel Jack",
     imgUrl: productImg09,
     category: "gabinete",
     price: 315,
@@ -286,7 +286,7 @@ const products = [
 
   {
     id: "12",
-    productName: "Gabinete Gamer Montech Air 1000 PREMIUM",
+    productName: "Gabinete Gamer Montech Air 1000",
     imgUrl: productImg12,
     category: "gabinete",
     price: 499,
@@ -424,7 +424,7 @@ const products = [
 
   {
     id: "18",
-    productName: "Placa de Vídeo Gigabyte GeForce RTX 3060 Gaming OC",
+    productName: "Placa de Vídeo Gigabyte RTX 3060",
     imgUrl: productImg18,
     category: "gpu",
     price: 2699,
@@ -447,7 +447,7 @@ const products = [
 
   {
     id: "19",
-    productName: "Placa de Vídeo PowerColor Hellhound Radeon RX 6600",
+    productName: "Placa de Vídeo PowerColor RX 6600",
     imgUrl: productImg19,
     category: "gpu",
     price: 1859,
@@ -470,8 +470,7 @@ const products = [
 
   {
     id: "20",
-    productName:
-      "Placa de Vídeo Gainward NVIDIA GeForce RTX 3050 Ghost OC",
+    productName: "Placa de Vídeo Gainward RTX 3050",
     imgUrl: productImg20,
     category: "gpu",
     price: 1999,
@@ -494,8 +493,7 @@ const products = [
 
   {
     id: "21",
-    productName:
-      "Placa de Vídeo MSI NVIDIA GeForce GTX 1650 D6 Ventus XS OC",
+    productName: "Placa de Vídeo MSI GTX 1650",
     imgUrl: productImg21,
     category: "gpu",
     price: 1199,
@@ -518,7 +516,7 @@ const products = [
 
   {
     id: "22",
-    productName: "Placa de Vídeo PowerColor Radeon RX 6800 XT Red Dragon",
+    productName: "Placa de Vídeo PowerColor RX 6800 XT",
     imgUrl: productImg22,
     category: "gpu",
     price: 4869,
@@ -541,7 +539,7 @@ const products = [
 
   {
     id: "23",
-    productName: "Placa de Vídeo INNO3D GeForce GTX 1050 Ti TWIN X2, 4GB",
+    productName: "Placa de Vídeo INNO3D GTX 1050",
     imgUrl: productImg23,
     category: "gpu",
     price: 949,

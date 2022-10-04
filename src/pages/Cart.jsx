@@ -22,7 +22,7 @@ const Cart = () => {
           <Row>
             <Col lg='9'>
               {cartItems.length === 0 ? (
-                <h2 className='fs-4 text-center'>
+                <h2 className='fs-4 text-center mb-5'>
                   Nenhum item adicionado no carrinho
                 </h2>
               ) : (
@@ -51,9 +51,7 @@ const Cart = () => {
                 <span className='fs-4 fw-bold'>R$ {totalAmount}.00</span>
               </h6>
 
-              <p className='fs-6 mt-2'>
-                Impostos e frete serão calculados no checkout
-              </p>
+              <p className='fs-6 mt-2'>Impostos e frete serão calculados no checkout</p>
               <div>
                 <button className='buy__btn w-100 '>
                   <Link to='/checkout'>Checkout</Link>
