@@ -1,19 +1,24 @@
 # GAMERDEV
 
-## Projeto usando React
+## Projeto usando React, Firebase e Redux Tolkit
 
-## GitPage:
+## GitPage: https://bit.ly/3M3AKFP
 
  <p align="center">
       <img src="src/assets/preview/home.png">
 </p>
 
-## Informações
+## Objetivo
 
-###
+### Foi criar um e commerce moderno usando redux tolkit para gereciamento de estados e firebase para autenticação.
 
 ## Descrição
 
-- ``
+- `Área de login`
+- `Área para criação de novos usários`
+- `Vários produtos do universo gamer`
+- `Opção de categorias`
+- `Opção de pesquisa por nome do produto`
+- `Carrinho de compras moderno`
 
 # Douglas Monteiro ❤😎
