@@ -2,7 +2,7 @@
 
 ## Projeto usando React, Firebase e Redux Tolkit
 
-## GitPage: https://bit.ly/3M3AKFP
+## Link: https://douglasmonteirodev.github.io/builds/gamerdev/
 
  <p align="center">
       <img src="src/assets/preview/home.png">
